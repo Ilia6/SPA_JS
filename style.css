@@ -1,0 +1,18 @@
+.app{
+    margin: 0 auto;
+    width: 600px;
+}
+
+.title{
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.input{
+    border:0;
+    box-shadow: none;
+    line-height: 40px;
+    padding: 0 15px;
+    height: 40px;
+    width: 100%;
+}
