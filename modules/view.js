@@ -6,10 +6,14 @@ export class View{
     this.title = this.createElement('h1', 'title');
     this.title.textContent = 'Github Search users';
 
+    this.serachBlock = this.createElement('div', 'search');
     this.searchForm = this.createElement('form', 'form');
     this.searchInput = this.createElement('input', 'input');
     this.searchInput.placeholder = 'Write user name...';
+    this.counter = this.createElement('span', 'counter');
     this.searchForm.append(this.searchInput);
+    this.serachBlock = append(this.searchForm);
+    this.counter.append(this.counter);
 
     this.main = this.createElement('div', 'main');
 
@@ -17,6 +21,7 @@ export class View{
     this.usersList = this.createElement('ul', 'users-list');
     this.userLoadMoreBtn = this.createElement('button', 'button');
     this.userLoadMoreBtn.textContent = 'Load More';
+    this.userLoadMoreBtn.style.display = "none";
     this.users.append(this.usersList);
     this.users.append(this.userLoadMoreBtn);
 
@@ -46,5 +51,13 @@ export class View{
     }
     showUserData(){
 
+    }
+
+    toggleViewUserloadMoreBtn(isShow){
+        this.userLoadMoreBtn.style.display = isShow ? 'inline-block' : 'none';
+    }
+
+    showCountMessage(message){
+        this.counter.textContent = message;
     }
 }
