@@ -6,14 +6,14 @@ export class View{
     this.title = this.createElement('h1', 'title');
     this.title.textContent = 'Github Search users';
 
-    this.serachBlock = this.createElement('div', 'search');
+    this.searchBlock = this.createElement('div', 'search');
     this.searchForm = this.createElement('form', 'form');
     this.searchInput = this.createElement('input', 'input');
     this.searchInput.placeholder = 'Write user name...';
     this.counter = this.createElement('span', 'counter');
     this.searchForm.append(this.searchInput);
-    this.serachBlock = append(this.searchForm);
-    this.counter.append(this.counter);
+    this.searchBlock.append(this.searchForm);
+    this.searchBlock.append(this.counter);
 
     this.main = this.createElement('div', 'main');
 
@@ -43,14 +43,20 @@ export class View{
 
     createPrevUser(userData) {
         const userPrev = this.createElement('li', 'user-small');
-        userPrev.addEventListener('click', this.showUserData);
+        userPrev.addEventListener('click', () => {
+            
+        });
     
         userPrev.innerHTML = `<img src="${userData.avatar_url}" alt="${userData.login}"> <span>${userData.login}</span>`;
     
         this.usersList.append(userPrev);
     }
     showUserData(){
+        const user = this.createElement('div', 'user');
 
+        user.innerHTML = '';
+
+        this.userInfo.append(user);
     }
 
     toggleViewUserloadMoreBtn(isShow){
@@ -59,5 +65,11 @@ export class View{
 
     showCountMessage(message){
         this.counter.textContent = message;
+    }
+
+    clearList(){
+        this.usersList.innerHTML = '';
+        this.counter.textContent = '';
+        this.toggleViewUserloadMoreBtn(false);
     }
 }
