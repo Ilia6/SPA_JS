@@ -1,6 +1,6 @@
 export class View{
-    constructor(){
-
+    constructor(api){
+    this.api = api;
     this.app = document.getElementById('app');
 
     this.title = this.createElement('h1', 'title');
@@ -43,20 +43,49 @@ export class View{
 
     createPrevUser(userData) {
         const userPrev = this.createElement('li', 'user-small');
-        userPrev.addEventListener('click', () => {
-            
-        });
+        userPrev.addEventListener('click', () => this.showUserData(userData));
     
-        userPrev.innerHTML = `<img src="${userData.avatar_url}" alt="${userData.login}"> <span>${userData.login}</span>`;
+        userPrev.innerHTML = `<img src="${userData.avatar_url}" alt="${userData.login}"><span>${userData.login}</span>`;
     
         this.usersList.append(userPrev);
     }
-    showUserData(){
+
+    showUserData(data){
+        
         const user = this.createElement('div', 'user');
 
-        user.innerHTML = '';
+        this.api.searcUsersData(data.login).then(data => {
+            const [followers, following, repos] = data;
+            const followersList = this/this.createUserDataBlock(followers, 'Followers');
+            const followingList = this/this.createUserDataBlock(following, 'Following');
+            const reposList = this/this.createUserDataBlock(repos, 'Repos');
 
+            user.innerHTML = `<img src="${data.avatar_url}" alt="${data.login}">
+                            <h2>${data.login}</h2>
+                            ${followingList}
+                            ${followingList}
+                            ${followingList}`;
+        });
+        this.userInfo.innerHTML = '';
         this.userInfo.append(user);
+    }
+
+    createUserDataBlock(list, title){
+        const block = this.createElement('div', 'block');
+        const blockTitle = this.createElement('h2', 'title');
+        const blockList = this.createElement('ul', 'block-list');
+
+        blockTitle.textContent = title;
+
+        list.forEach(item => {
+            blockList.innerHTML += `<li class="block-list-items">
+            <a href ="">${item.login}</a>
+            </li>`
+        });
+
+        block.append(blockTitle);
+
+        return block.innerHTML
     }
 
     toggleViewUserloadMoreBtn(isShow){
