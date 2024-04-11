@@ -36,7 +36,7 @@ export class Search {
     }
 
     loadUsers(){
-        this.api.searcUsers(this.view.searchInput.value, this.currentUserPage).then(
+        this.api.searchUsers(this.view.searchInput.value, this.currentUserPage).then(
             res => {
                 const users = res.items;
                 this.setShowlUsersCount(this.showUserCount + users?.length);
